@@ -14,15 +14,24 @@ public class MatchController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             if (IsValidPosition(tetramino.transform.position + Vector3.left))
                 tetramino.transform.position += Vector3.left;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
             if (IsValidPosition(tetramino.transform.position + Vector3.right))
                 tetramino.transform.position += Vector3.right;
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            tetramino.transform.Rotate(new Vector3(0, 0, 90));
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            while (IsValidPosition(tetramino.transform.position + Vector3.down))
+                tetramino.transform.position += Vector3.down;
         }
     }
 
