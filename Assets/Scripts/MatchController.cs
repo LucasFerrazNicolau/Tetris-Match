@@ -14,15 +14,15 @@ public class MatchController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (IsValidPosition(tetramino.transform.position + Vector3.left * 0.1f))
-                tetramino.transform.position += Vector3.left * 0.1f;
+            if (IsValidPosition(tetramino.transform.position + Vector3.left))
+                tetramino.transform.position += Vector3.left;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (IsValidPosition(tetramino.transform.position + Vector3.right * 0.1f))
-                tetramino.transform.position += Vector3.right * 0.1f;
+            if (IsValidPosition(tetramino.transform.position + Vector3.right))
+                tetramino.transform.position += Vector3.right;
         }
     }
 
