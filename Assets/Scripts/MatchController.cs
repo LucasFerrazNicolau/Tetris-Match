@@ -10,6 +10,10 @@ public class MatchController : MonoBehaviour
     private int height;
     public int Height => height;
 
+    [SerializeField]
+    private Vector3 spawnPosition;
+
+    public Bag bag;
     public Tetramino tetramino;
 
     private void Update()
@@ -32,6 +36,18 @@ public class MatchController : MonoBehaviour
         {
             while (IsValidPosition(tetramino.transform.position + Vector3.down))
                 tetramino.transform.position += Vector3.down;
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D raycastHit = Physics2D.GetRayIntersection(ray);
+            if (raycastHit.transform != null && raycastHit.transform.parent.gameObject.TryGetComponent(out Tetramino newTetramino))
+            {
+                Debug.Log("Encontrou tetraminó");
+                if (tetramino != null)
+                    Destroy(tetramino.gameObject);
+                Instantiate(bag.SelectTetramino(newTetramino), spawnPosition, Quaternion.identity, transform);
+            }
         }
     }
 
