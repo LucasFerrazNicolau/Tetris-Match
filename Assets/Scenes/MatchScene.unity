@@ -432,7 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 3
   height: 3
-  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnPosition: {x: 0, y: 4, z: 0}
   bag: {fileID: 453196047}
   tetramino: {fileID: 0}
 --- !u!4 &1187293099
