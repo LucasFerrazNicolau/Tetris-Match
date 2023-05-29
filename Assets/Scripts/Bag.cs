@@ -6,6 +6,9 @@ public class Bag : MonoBehaviour
 	private int height;
 
 	[SerializeField]
+	private float tetraminoButtonSize;
+
+	[SerializeField]
 	private Tetramino[] tetraminoes;
 
 	private Tetramino[] bag;
@@ -34,6 +37,7 @@ public class Bag : MonoBehaviour
 		{
 			float offset = i * (height / bag.Length);
 			Tetramino tetramino = Instantiate(tetraminoes[i], transform.position + offset * Vector3.down, Quaternion.identity, transform);
+			tetramino.transform.localScale = new Vector3(tetraminoButtonSize, tetraminoButtonSize, tetraminoButtonSize);
 			bag[i] = tetramino;
 		}
 	}
