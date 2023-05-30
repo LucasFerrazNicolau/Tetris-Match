@@ -152,12 +152,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c9f24458aaae744adbc5500f386cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 16
+  height: 20
   tetraminoButtonSize: 0.4
   tetraminoes:
   - {fileID: 1072680325302731549, guid: 474be0762d91c8e4985ad03236ce7ee1, type: 3}
-  - {fileID: 1072680325302731549, guid: 474be0762d91c8e4985ad03236ce7ee1, type: 3}
-  - {fileID: 1072680325302731549, guid: 474be0762d91c8e4985ad03236ce7ee1, type: 3}
+  - {fileID: 1072680325302731549, guid: 3a5b9608c8634bf4f9866e33d16845de, type: 3}
+  - {fileID: 1072680325302731549, guid: 5ab6c077bc3383243a3c896b0f190e4c, type: 3}
+  - {fileID: 1072680325302731549, guid: fb687095c0c3d8d4fb3a814063b988de, type: 3}
+  - {fileID: 1072680325302731549, guid: 3a050fa1644e44844a85bcbd37e36d1f, type: 3}
+  - {fileID: 1072680325302731549, guid: cbb3e8865a6056d4ba6ea905bdeb3c3d, type: 3}
+  - {fileID: 1072680325302731549, guid: ca6a2d513744c0a4aa4a9f8cbafec696, type: 3}
 --- !u!4 &453196048
 Transform:
   m_ObjectHideFlags: 0
