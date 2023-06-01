@@ -3,12 +3,8 @@ using UnityEngine;
 
 public class Tetramino : MonoBehaviour
 {
-    private SpriteRenderer sr;
-
-    private void Awake()
-    {
-        sr = GetComponent<SpriteRenderer>();
-    }
+    [SerializeField]
+    private TetraminoType type;
 
     public void Rotate()
     {
@@ -17,7 +13,25 @@ public class Tetramino : MonoBehaviour
             float oldX = block.position.x - transform.position.x;
             float oldY = block.position.y - transform.position.y;
 
-            block.position = transform.position + new Vector3(oldY, -oldX, 0);
+            if (type == TetraminoType.I)
+            {
+                block.position = transform.position + new Vector3(oldY, oldX, 0);
+            }
+            else if (type != TetraminoType.O)
+            {
+                block.position = transform.position + new Vector3(oldY, -oldX, 0);
+            }
         }
+    }
+
+    enum TetraminoType
+    {
+        I,
+        J,
+        L,
+        O,
+        S,
+        T,
+        Z
     }
 }
