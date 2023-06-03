@@ -60,25 +60,14 @@ public class MatchController : MonoBehaviour
             RaycastHit2D raycastHit = Physics2D.GetRayIntersection(ray);
             if (raycastHit.transform != null && raycastHit.transform.parent.gameObject.TryGetComponent(out Tetramino newTetramino))
             {
-                Debug.Log("Encontrou tetraminó");
-                if (tetramino != null)
-                    Destroy(tetramino.gameObject);
-                tetramino = Instantiate(bag.SelectTetramino(newTetramino), spawnPosition, Quaternion.identity, transform);
+                if (newTetramino.transform.parent == bag.transform)
+                {
+                    if (tetramino != null)
+                        Destroy(tetramino.gameObject);
+                    tetramino = Instantiate(bag.SelectTetramino(newTetramino), spawnPosition, Quaternion.identity, transform);
+                }
             }
         }
-    }
-
-    // Gonna be removed
-    private bool IsValidPosition(Vector3 position)
-    {
-        int x = (int)position.x + width;
-        int y = (int)position.y + height;
-
-        return x >= 0
-            && x <= 2 * width
-            && y >= 0
-            && y <= 2 * height
-            && grid[x, y] == null;
     }
 
     private bool IsValidHorizontalMove(Vector3 position)
@@ -99,15 +88,31 @@ public class MatchController : MonoBehaviour
         return !existInvalidBlock;
     }
 
+    private bool IsValidVerticalMove(Vector3 position)
+    {
+        bool existInvalidBlock = false;
+
+        foreach (Transform block in tetramino.transform.GetComponentsInChildren<Transform>().Skip(1))
+        {
+            Vector3 newBlockPosition = block.position - tetramino.transform.position + position;
+            int indexX = (int)newBlockPosition.x + width;
+            int indexY = (int)newBlockPosition.y + height;
+
+            if (indexY < 0 || (indexY <= 2 * height && grid[indexX, indexY] != null))
+            {
+                existInvalidBlock = true;
+                break;
+            }
+        }
+
+        return !existInvalidBlock;
+    }
+
     private Vector3 GetFinalDownPosition()
     {
         Vector3 downIncrement = Vector3.zero;
-        Transform[] blocksPositions = tetramino.transform.GetComponentsInChildren<Transform>();
 
-        while (IsValidPosition(blocksPositions[0].position + downIncrement + Vector3.down)
-            && IsValidPosition(blocksPositions[1].position + downIncrement + Vector3.down)
-            && IsValidPosition(blocksPositions[2].position + downIncrement + Vector3.down)
-            && IsValidPosition(blocksPositions[3].position + downIncrement + Vector3.down))
+        while (IsValidVerticalMove(tetramino.transform.position + downIncrement + Vector3.down))
             downIncrement += Vector3.down;
 
         return tetramino.transform.position + downIncrement;

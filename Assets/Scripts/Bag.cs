@@ -37,7 +37,7 @@ public class Bag : MonoBehaviour
 		{
 			float offset = i * (height / bag.Length);
 			Tetramino tetramino = Instantiate(tetraminoes[i], transform.position + offset * Vector3.down, Quaternion.identity, transform);
-			tetramino.transform.localScale = new Vector3(tetraminoButtonSize, tetraminoButtonSize, tetraminoButtonSize);
+			tetramino.transform.localScale = tetraminoButtonSize * Vector3.one;
 			bag[i] = tetramino;
 		}
 	}
@@ -72,7 +72,6 @@ public class Bag : MonoBehaviour
 		}
 
 		selectedTetramino = System.Array.FindIndex(bag, x => x == tetramino);
-		//selectedTetramino = Array.FindIndex(tetraminoBag, x => Object.ReferenceEquals(x, tetramino));
 		tetramino.gameObject.SetActive(false);
 
 		return tetraminoes[selectedTetramino];
