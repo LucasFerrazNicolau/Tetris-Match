@@ -1,18 +1,19 @@
 using System.Linq;
 using UnityEngine;
 
-public class MatchController : MonoBehaviour
+public class MatchManager : MonoBehaviour
 {
     [SerializeField]
     private int width;
-    public int Width => width;
 
     [SerializeField]
     private int height;
-    public int Height => height;
 
     [SerializeField]
     private Vector3 spawnPosition;
+
+    [SerializeField]
+    private Vector3 gridCenter;
 
     public Bag bag;
     public Tetramino tetramino;
@@ -46,9 +47,9 @@ public class MatchController : MonoBehaviour
 
             foreach (Transform block in tetramino.transform.GetComponentsInChildren<Transform>())
             {
-                int x = (int)block.position.x + width;
-                int y = (int)block.position.y + height;
-                grid[x, y] = block.gameObject;
+                int indexX = (int)block.position.x + width - (int)gridCenter.x;
+                int indexY = (int)block.position.y + height - (int)gridCenter.y;
+                grid[indexX, indexY] = block.gameObject;
             }
 
             bag.ConsumeTetramino();
@@ -95,8 +96,8 @@ public class MatchController : MonoBehaviour
         foreach (Transform block in tetramino.transform.GetComponentsInChildren<Transform>().Skip(1))
         {
             Vector3 newBlockPosition = block.position - tetramino.transform.position + position;
-            int indexX = (int)newBlockPosition.x + width;
-            int indexY = (int)newBlockPosition.y + height;
+            int indexX = (int)newBlockPosition.x + width - (int)gridCenter.x;
+            int indexY = (int)newBlockPosition.y + height - (int)gridCenter.y;
 
             if (indexY < 0 || (indexY <= 2 * height && grid[indexX, indexY] != null))
             {
